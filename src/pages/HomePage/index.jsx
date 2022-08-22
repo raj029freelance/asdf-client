@@ -1,12 +1,10 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import RecentSearch from "../../components/RecentSearch/RecentSearch";
 import SearchPage from "../../components/SearchPage/SearchPage";
 import "./index.scss";
 
 const HomePage = () => {
-  const history = useHistory();
-
   return (
     <div className="homePageWrapper">
       <div className="searchSection">
