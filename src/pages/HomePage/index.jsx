@@ -18,7 +18,6 @@ const HomePage = () => {
           <SearchPage />
         </div>
       </div>
-      ß
       <RecentSearch />
       <div className="footer">
         <Link to="/contact">Contact Us</Link>
