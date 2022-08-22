@@ -1,14 +1,12 @@
 import { Card } from "antd";
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./CommonStyle.scss";
 
 function PrivacyPolicy() {
-  const companyName = "MyCompany";
-  const websiteName = "MyCompanyWebsite";
-  const websiteURL = "MyWebsiteURL";
-
-  const history = useHistory();
+  const companyName = "Drektory Services Ltd.";
+  const websiteName = "Drektory";
+  const websiteURL = "https://drektory.netlify.app/";
 
   return (
     <div>

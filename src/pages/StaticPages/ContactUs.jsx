@@ -1,11 +1,9 @@
 import { Input, Button } from "antd";
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./ContactUs.scss";
 
 function ContactUs() {
-  const history = useHistory();
-
   return (
     <div className="contact-wrapper">
       <div className="form-wrapper">
