@@ -12,12 +12,15 @@ const HomePage = () => {
           <h2>Get a rep on the phone faster & get better help.</h2>
         </div>
         <div className="autoCompleteSection">
-            <SearchPage  />
+          <SearchPage />
         </div>
       </div>
-      <RecentSearch/>
+      ß
+      <RecentSearch />
       <div className="footer">
-        <a href="#">Test</a>
+        <a href="/contact">Contact Us</a>
+        <a href="/terms">Terms and Conditions</a>
+        <a href="/privacy_policy">Privacy Policy</a>
         <span>@ Get Human</span>
       </div>
     </div>

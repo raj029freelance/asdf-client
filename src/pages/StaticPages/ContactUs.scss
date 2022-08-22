@@ -1,0 +1,25 @@
+.contact-wrapper{
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-height: 100vh;
+
+  .form-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  
+  }
+
+  form {
+    display: flex;
+    width: 400px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+}
+
