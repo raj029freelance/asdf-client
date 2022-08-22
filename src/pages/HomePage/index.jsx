@@ -1,9 +1,12 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import RecentSearch from "../../components/RecentSearch/RecentSearch";
 import SearchPage from "../../components/SearchPage/SearchPage";
 import "./index.scss";
 
 const HomePage = () => {
+  const history = useHistory();
+
   return (
     <div className="homePageWrapper">
       <div className="searchSection">
@@ -18,9 +21,18 @@ const HomePage = () => {
       ß
       <RecentSearch />
       <div className="footer">
-        <a href="/contact">Contact Us</a>
-        <a href="/terms">Terms and Conditions</a>
-        <a href="/privacy_policy">Privacy Policy</a>
+        <a href="javascript:void(0)" onClick={() => history.push("/contact")}>
+          Contact Us
+        </a>
+        <a href="javascript:void(0)" onClick={() => history.push("/terms")}>
+          Terms and Conditions
+        </a>
+        <a
+          href="javascript:void(0)"
+          onClick={() => history.push("/privacy_policy")}
+        >
+          Privacy Policy
+        </a>
         <span>@ Get Human</span>
       </div>
     </div>

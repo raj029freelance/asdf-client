@@ -1,11 +1,15 @@
 import { Card } from "antd";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import "./CommonStyle.scss";
 
 function PrivacyPolicy() {
   const companyName = "MyCompany";
   const websiteName = "MyCompanyWebsite";
   const websiteURL = "MyWebsiteURL";
+
+  const history = useHistory();
+
   return (
     <div>
       <Card title={`Privacy Policy for ${companyName}`}>
@@ -233,9 +237,15 @@ function PrivacyPolicy() {
         </p>
       </Card>
       <div className="footer">
-        <a href="/">Home</a>
-        <a href="/contact">Contact Us</a>
-        <a href="/terms">Terms and Conditions</a>
+        <a href="javascript:void(0)" onClick={() => history.push("/")}>
+          Home
+        </a>
+        <a href="javascript:void(0)" onClick={() => history.push("/contact")}>
+          Contact Us
+        </a>
+        <a href="javascript:void(0)" onClick={() => history.push("/terms")}>
+          Terms and Conditions
+        </a>
         <span>@ Get Human</span>
       </div>
     </div>

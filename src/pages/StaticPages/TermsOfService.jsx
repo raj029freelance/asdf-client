@@ -1,11 +1,14 @@
 import { Card } from "antd";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import "./CommonStyle.scss";
 
 function TermsOfService() {
   const companyName = "MyCompany";
   const websiteName = "MyCompanyWebsite";
   const websiteURL = "MyWebsiteURL";
+
+  const history = useHistory();
 
   return (
     <div>
@@ -328,9 +331,18 @@ function TermsOfService() {
         </p>
       </Card>
       <div className="footer">
-        <a href="/">Home</a>
-        <a href="/contact">Contact Us</a>
-        <a href="/privacy_policy">Privacy Policy</a>
+        <a href="javascript:void(0)" onClick={() => history.push("/")}>
+          Home
+        </a>
+        <a href="javascript:void(0)" onClick={() => history.push("/contact")}>
+          Contact Us
+        </a>
+        <a
+          href="javascript:void(0)"
+          onClick={() => history.push("/privacy_policy")}
+        >
+          Privacy Policy
+        </a>
         <span>@ Get Human</span>
       </div>
     </div>
