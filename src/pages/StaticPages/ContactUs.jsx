@@ -10,7 +10,7 @@ function ContactUs() {
         <h2>
           <strong>Contact Us</strong>
         </h2>
-        <form>
+        <form onSubmit={(e) => e.preventDefault()}>
           <Input name="name" placeholder="Name" required type="text" />
           <Input
             name="email"
