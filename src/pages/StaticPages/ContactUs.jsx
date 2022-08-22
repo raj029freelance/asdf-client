@@ -1,6 +1,6 @@
 import { Input, Button } from "antd";
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./ContactUs.scss";
 
 function ContactUs() {
@@ -27,18 +27,9 @@ function ContactUs() {
         </form>
       </div>
       <div className="footer">
-        <a href="javascript:void(0)" onClick={() => history.push("/")}>
-          Home
-        </a>
-        <a href="javascript:void(0)" onClick={() => history.push("/terms")}>
-          Terms and Conditions
-        </a>
-        <a
-          href="javascript:void(0)"
-          onClick={() => history.push("/privacy_policy")}
-        >
-          Privacy Policy
-        </a>
+        <Link to="/">Home</Link>
+        <Link to="/terms">Terms and Conditions</Link>
+        <Link to="/privacy_policy">Privacy Policy</Link>
         <span>@ Get Human</span>
       </div>
     </div>
