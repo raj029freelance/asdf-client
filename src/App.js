@@ -7,18 +7,24 @@ import TermsOfService from "./pages/StaticPages/TermsOfService";
 import ContactUs from "./pages/StaticPages/ContactUs";
 import PrivacyPolicy from "./pages/StaticPages/PrivacyPolicy";
 import ScrollToTop from "./components/ScrollToTop";
+import { Helmet } from "react-helmet";
 
 function App() {
   return (
-    <ScrollToTop>
-      <Switch>
-        <Route path="/" exact component={HomePage} />
-        <Route path="/privacy_policy" component={PrivacyPolicy} />
-        <Route path="/contact" component={ContactUs} />
-        <Route path="/terms" component={TermsOfService} />
-        <Route path="/:id" component={CompanyDetail} />
-      </Switch>
-    </ScrollToTop>
+    <div className="App">
+      <Helmet>
+        <title>App Title</title>
+      </Helmet>
+      <ScrollToTop>
+        <Switch>
+          <Route path="/" exact component={HomePage} />
+          <Route path="/privacy_policy" component={PrivacyPolicy} />
+          <Route path="/contact" component={ContactUs} />
+          <Route path="/terms" component={TermsOfService} />
+          <Route path="/:id" component={CompanyDetail} />
+        </Switch>
+      </ScrollToTop>
+    </div>
   );
 }
 
