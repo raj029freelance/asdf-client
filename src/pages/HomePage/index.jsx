@@ -43,7 +43,7 @@ const HomePage = () => {
         <div className="footer">
           <Link to="/contact">Contact Us</Link>
           <Link to="/terms">Terms and Conditions</Link>
-          <Link to="/privacy_policy">Privacy Policy</Link>
+          <Link to="/privacy-policy">Privacy Policy</Link>
           <span>@ Get Human</span>
         </div>
       </div>

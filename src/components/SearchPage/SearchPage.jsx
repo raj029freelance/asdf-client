@@ -20,8 +20,6 @@ const SearchPage = () => {
 
   const [value, setValue] = useState('');
 
-
-
   return (
     <DebounceSelect
     value={value} 

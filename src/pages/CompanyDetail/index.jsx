@@ -13,7 +13,7 @@ import { Helmet } from "react-helmet";
 const CompanyDetail = () => {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
-  const [organizationData, setOrganizationData] = useState({});
+  const [organizationData, setOrganizationData] = useState();
   const [isModalVisible, setIsModalvisible] = useState(false);
   const [pageTitle, setPageTitle] = useState("React App");
 
@@ -27,6 +27,7 @@ const CompanyDetail = () => {
       })
       .catch((err) => {
         console.log(err, "err here");
+        history.replace("/not-found");
       })
       .finally(() => {
         setIsLoading(false);
@@ -63,84 +64,91 @@ const CompanyDetail = () => {
         {isLoading ? (
           <ReactLoading type="bars" color="#5f49d9" className="posCenter" />
         ) : (
-          <div className="container">
-            <div className="titleSection">
-              <h1>{`${organizationData?.CompanyName} Phone Number`}</h1>
-              <p>{`${organizationData?.CompanyName} ${organizationData?.DepartmentYourCalling} with Drektory`}</p>
-            </div>
-            <div className="detailSectionWrapper">
-              <div className="custom-card">
-                <div className="section">
-                  <h1 className="link">{organizationData?.PhoneNumber}</h1>
-                  <p className="description">
-                    {organizationData?.DepartmentYourCalling}
-                  </p>
-                </div>
-                <div
-                  className="section"
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    width: "100%",
-                  }}
-                >
-                  <div>
-                    <h1 className="link">
-                      {organizationData?.CallCenterHours}
-                    </h1>
-                    <p className="description">Service Hours</p>
-                  </div>
-                  <div>
-                    <h1 className="link">{organizationData?.BestTimeToDail}</h1>
-                    <p className="description">Best Time to Dail</p>
-                  </div>
-                </div>
-                <Button type="primary" onClick={() => setIsModalvisible(true)}>
-                  Help with my issue
-                </Button>
+          organizationData && (
+            <div className="container">
+              <div className="titleSection">
+                <h1>{`${organizationData.CompanyName} Phone Number`}</h1>
+                <p>{`${organizationData.CompanyName} ${organizationData.DepartmentYourCalling} with Drektory`}</p>
               </div>
-              <ArticleDescriptionCard
-                overview={organizationData?.description}
-              />
-              <div className="detailsSection">
-                <h2>Company Details</h2>
-                <div className="detailTable">
-                  <div>
-                    <span className="tableSpan">Company Name</span>
-                    <span className="tableSpan bold">
-                      {organizationData?.CompanyName}
-                    </span>
+              <div className="detailSectionWrapper">
+                <div className="custom-card">
+                  <div className="section">
+                    <h1 className="link">{organizationData.PhoneNumber}</h1>
+                    <p className="description">
+                      {organizationData.DepartmentYourCalling}
+                    </p>
                   </div>
-                  <div>
-                    <span className="tableSpan">
-                      Department You are Calling
-                    </span>
-                    <span className="bold tableSpan">
-                      {organizationData?.DepartmentYourCalling}
-                    </span>
+                  <div
+                    className="section"
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      width: "100%",
+                    }}
+                  >
+                    <div>
+                      <h1 className="link">
+                        {organizationData.CallCenterHours}
+                      </h1>
+                      <p className="description">Service Hours</p>
+                    </div>
+                    <div>
+                      <h1 className="link">
+                        {organizationData.BestTimeToDail}
+                      </h1>
+                      <p className="description">Best Time to Dail</p>
+                    </div>
                   </div>
-                  <div>
-                    <span className="tableSpan">Call Center Hours</span>
-                    <span className="tableSpan bold">
-                      {organizationData?.CallCenterHours}
-                    </span>
-                  </div>
-                  <div>
-                    <span className="tableSpan">Best time to Dial</span>
-                    <span className="tableSpan bold">
-                      {organizationData?.BestTimeToDail}
-                    </span>
-                  </div>
-                  <div className="borderBottom">
-                    <span className="tableSpan">Phone Number</span>
-                    <span className="tableSpan bold">
-                      {organizationData?.PhoneNumber}
-                    </span>
+                  <Button
+                    type="primary"
+                    onClick={() => setIsModalvisible(true)}
+                  >
+                    Help with my issue
+                  </Button>
+                </div>
+                <ArticleDescriptionCard
+                  overview={organizationData.description}
+                />
+                <div className="detailsSection">
+                  <h2>Company Details</h2>
+                  <div className="detailTable">
+                    <div>
+                      <span className="tableSpan">Company Name</span>
+                      <span className="tableSpan bold">
+                        {organizationData.CompanyName}
+                      </span>
+                    </div>
+                    <div>
+                      <span className="tableSpan">
+                        Department You are Calling
+                      </span>
+                      <span className="bold tableSpan">
+                        {organizationData.DepartmentYourCalling}
+                      </span>
+                    </div>
+                    <div>
+                      <span className="tableSpan">Call Center Hours</span>
+                      <span className="tableSpan bold">
+                        {organizationData.CallCenterHours}
+                      </span>
+                    </div>
+                    <div>
+                      <span className="tableSpan">Best time to Dial</span>
+                      <span className="tableSpan bold">
+                        {organizationData.BestTimeToDail}
+                      </span>
+                    </div>
+                    <div className="borderBottom">
+                      <span className="tableSpan">Phone Number</span>
+                      <span className="tableSpan bold">
+                        {organizationData.PhoneNumber}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          )
         )}
       </div>
       <QueryModal
