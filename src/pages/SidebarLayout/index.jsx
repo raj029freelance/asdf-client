@@ -15,9 +15,19 @@ const SideBarLayout = ({ children, recentSearches }) => {
           style={{ position: "fixed", height: "100vh", userSelect: "none" }}
           className="sidebar-left"
         >
-          <p>Phone Numbers</p>
-          <p>Contact Information</p>
-          <p>Customer Service</p>
+          {["Phone Numbers", "Contact Information", "Customer Service"].map(
+            (item, index) => (
+              <p
+                key={index}
+                onClick={(e) => {
+                  e.preventDefault();
+                  history.push("/");
+                }}
+              >
+                {item}
+              </p>
+            )
+          )}
           <p
             onClick={(e) => {
               e.preventDefault();
@@ -26,7 +36,14 @@ const SideBarLayout = ({ children, recentSearches }) => {
           >
             Our Blogs
           </p>
-          <p>Local postings</p>
+          <p
+            onClick={(e) => {
+              e.preventDefault();
+              history.push("/");
+            }}
+          >
+            Local postings
+          </p>
         </div>
         <div className="content" style={{ padding: "2rem" }}>
           {children}
