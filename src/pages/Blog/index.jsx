@@ -63,6 +63,9 @@ const BlogContent = ({ data }) => {
   const history = useHistory();
   return (
     <>
+      <Helmet>
+        <title>{data.title}</title>
+      </Helmet>
       <div className="title-wrapper">
         <div
           className="back-icon"
