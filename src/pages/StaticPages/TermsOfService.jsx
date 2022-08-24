@@ -9,7 +9,7 @@ function TermsOfService() {
   const websiteURL = "https://drektory.netlify.app/";
 
   return (
-    <div>
+    <div className="wrapper">
       <Card title="Terms and Conditions">
         <p>Welcome to {websiteName}!</p>
 

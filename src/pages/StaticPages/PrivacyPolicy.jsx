@@ -9,7 +9,7 @@ function PrivacyPolicy() {
   const websiteURL = "https://drektory.netlify.app/";
 
   return (
-    <div>
+    <div className="wrapper">
       <Card title={`Privacy Policy for ${companyName}`}>
         <p>
           At {websiteName}, accessible from {websiteURL}, one of our main
