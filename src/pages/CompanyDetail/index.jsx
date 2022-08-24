@@ -39,7 +39,7 @@ const CompanyDetail = () => {
       <Helmet>
         <title>{pageTitle}</title>
       </Helmet>
-      <SideBarLayout loading={isLoading}>
+      <SideBarLayout isOnCompanyDetails={true} loading={isLoading}>
         {organizationData && (
           <OrganizationData
             data={organizationData}

@@ -61,17 +61,6 @@
     @media (min-width: "1300px") {
       display: flex;
     }
-
-    p {
-      font-size: 1rem;
-      color: black;
-      margin-bottom: 10px;
-      transition: color 0.3s;
-      cursor: pointer;
-    }
-    p:hover {
-      color: hsl(249, 65%, 65%);
-    }
   }
 
   .sidebar-right {
@@ -85,14 +74,18 @@
     @media (min-width: "768px") {
       display: flex;
     }
+  }
 
-    a {
+  .sidebar-left,
+  .sidebar-right {
+    p {
       font-size: 1rem;
       color: black;
       margin-bottom: 10px;
+      transition: color 0.3s;
       cursor: pointer;
     }
-    a:hover {
+    p:hover {
       color: hsl(249, 65%, 65%);
     }
   }

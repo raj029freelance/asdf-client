@@ -4,7 +4,7 @@ import "./index.scss";
 import ReactLoading from "react-loading";
 import axios from "axios";
 
-const SideBarLayout = ({ children, loading }) => {
+const SideBarLayout = ({ children, loading, isOnCompanyDetails = false }) => {
   const [isRecentsLoading, setRecentsLoading] = useState(true);
   const [recentSearch, setRecentSearch] = useState();
   const history = useHistory();
@@ -28,19 +28,27 @@ const SideBarLayout = ({ children, loading }) => {
           style={{ position: "fixed", height: "100vh", userSelect: "none" }}
           className="sidebar-left"
         >
-          {["Phone Numbers", "Contact Information", "Customer Service"].map(
-            (item, index) => (
-              <p
-                key={index}
-                onClick={(e) => {
-                  e.preventDefault();
-                  history.push("/");
-                }}
-              >
-                {item}
-              </p>
-            )
-          )}
+          {[
+            { title: "Phone Numbers", id: "phone-details" },
+            { title: "Contact Information", id: "contact-information" },
+            { title: "Company Details", id: "company-details" },
+            { title: "Customer Service", id: "company-details" },
+          ].map(({ title, id }, index) => (
+            <p
+              key={index}
+              onClick={(e) => {
+                e.preventDefault();
+                if (isOnCompanyDetails) {
+                  const target = document.getElementById(id);
+                  target.scrollIntoView();
+                  return;
+                }
+                history.push("/");
+              }}
+            >
+              {title}
+            </p>
+          ))}
           <p
             onClick={(e) => {
               e.preventDefault();
@@ -89,17 +97,17 @@ const SideBarLayout = ({ children, loading }) => {
           ) : (
             recentSearch &&
             recentSearch.map((organization, index) => (
-              <a
+              <p
                 align="start"
                 key={index}
                 onClick={(e) => {
                   e.preventDefault();
                   history.push(`/${organization?.organization_id}`);
-                  history.go(0);
+                  if (isOnCompanyDetails) history.go(0);
                 }}
               >
                 {organization.organization_name}
-              </a>
+              </p>
             ))
           )}
         </div>
