@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Button, Card, Table } from "antd";
 import ArticleDescriptionCard from "../../components/articleDescriptionCard/ArticleDescriptionCard";
 import "./OrganizationData.scss";
