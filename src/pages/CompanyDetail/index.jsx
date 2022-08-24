@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
-import { Button } from "antd";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import "./index.scss";
-import ArticleDescriptionCard from "../../components/articleDescriptionCard/ArticleDescriptionCard";
 import QueryModal from "../../components/queryModal/QueryModal";
 import { Helmet } from "react-helmet";
+import OrganizationData from "./OrganizationData";
 
 const CompanyDetail = () => {
   const { id } = useParams();
@@ -17,144 +16,95 @@ const CompanyDetail = () => {
   const [isModalVisible, setIsModalvisible] = useState(false);
   const [pageTitle, setPageTitle] = useState("React App");
 
+  const [recentSearch, setRecentSearch] = useState([]);
+
   const history = useHistory();
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/organizations/${id}`)
-      .then((resp) => {
-        console.log(resp, "resp here");
-        setOrganizationData(resp.data?.data?.organization);
+      .then((orgResp) => {
+        axios
+          .get(`${process.env.REACT_APP_BACKEND_URL}/recentSearch/`)
+          .then((resp) => {
+            setRecentSearch(resp.data?.searches);
+            setOrganizationData(orgResp.data?.data?.organization);
+          });
       })
-      .catch((err) => {
-        console.log(err, "err here");
-        history.replace("/not-found");
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+      .catch(() => history.replace("/not-found"))
+      .finally(() => setIsLoading(false));
   }, []);
 
   useEffect(() => {
-    console.log("Entered in useEffect");
-    if (organizationData) {
-      console.log("Entered");
-      setPageTitle(organizationData?.CompanyName);
-      axios.post(`${process.env.REACT_APP_BACKEND_URL}/recentSearch/`, {
-        organization_name: organizationData?.CompanyName,
-        organization_id: organizationData?._id,
-      });
-    }
+    if (!organizationData) return;
+    setPageTitle(organizationData?.CompanyName);
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/recentSearch/`, {
+      organization_name: organizationData?.CompanyName,
+      organization_id: organizationData?._id,
+    });
   }, [organizationData]);
+
   return (
     <>
       <Helmet>
         <title>{pageTitle}</title>
       </Helmet>
-      <div className="detailWrapper">
-        <div className="heading">
-          <span
-            className="tableSpan"
-            style={{ cursor: "pointer" }}
-            onClick={() => history.push("/")}
-          >
-            Drektory.com
-          </span>
-        </div>
-
-        {isLoading ? (
+      {isLoading ? (
+        <div style={{ height: "100vh", display: "grid", placeItems: "center" }}>
           <ReactLoading type="bars" color="#5f49d9" className="posCenter" />
-        ) : (
-          organizationData && (
-            <div className="container">
-              <div className="titleSection">
-                <h1>{`${organizationData.CompanyName} Phone Number`}</h1>
-                <p>{`${organizationData.CompanyName} ${organizationData.DepartmentYourCalling} with Drektory`}</p>
+        </div>
+      ) : (
+        <>
+          {organizationData && (
+            <div>
+              <div className="nav">
+                <h1>Drektory</h1>
               </div>
-              <div className="detailSectionWrapper">
-                <div className="custom-card">
-                  <div className="section">
-                    <h1 className="link">{organizationData.PhoneNumber}</h1>
-                    <p className="description">
-                      {organizationData.DepartmentYourCalling}
-                    </p>
-                  </div>
-                  <div
-                    className="section"
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      width: "100%",
-                    }}
-                  >
-                    <div>
-                      <h1 className="link">
-                        {organizationData.CallCenterHours}
-                      </h1>
-                      <p className="description">Service Hours</p>
-                    </div>
-                    <div>
-                      <h1 className="link">
-                        {organizationData.BestTimeToDail}
-                      </h1>
-                      <p className="description">Best Time to Dail</p>
-                    </div>
-                  </div>
-                  <Button
-                    type="primary"
-                    onClick={() => setIsModalvisible(true)}
-                  >
-                    Help with my issue
-                  </Button>
+              <div className="details-wrapper">
+                <div className="sidebar-left">
+                  <p>Phone Numbers</p>
+                  <p>Contact Information</p>
+                  <p>Customer Service</p>
+                  <p>Fix Common Issues</p>
+                  <p>Local postings</p>
                 </div>
-                <ArticleDescriptionCard
-                  overview={organizationData.description}
-                />
-                <div className="detailsSection">
-                  <h2>Company Details</h2>
-                  <div className="detailTable">
-                    <div>
-                      <span className="tableSpan">Company Name</span>
-                      <span className="tableSpan bold">
-                        {organizationData.CompanyName}
-                      </span>
-                    </div>
-                    <div>
-                      <span className="tableSpan">
-                        Department You are Calling
-                      </span>
-                      <span className="bold tableSpan">
-                        {organizationData.DepartmentYourCalling}
-                      </span>
-                    </div>
-                    <div>
-                      <span className="tableSpan">Call Center Hours</span>
-                      <span className="tableSpan bold">
-                        {organizationData.CallCenterHours}
-                      </span>
-                    </div>
-                    <div>
-                      <span className="tableSpan">Best time to Dial</span>
-                      <span className="tableSpan bold">
-                        {organizationData.BestTimeToDail}
-                      </span>
-                    </div>
-                    <div className="borderBottom">
-                      <span className="tableSpan">Phone Number</span>
-                      <span className="tableSpan bold">
-                        {organizationData.PhoneNumber}
-                      </span>
-                    </div>
-                  </div>
+                <div style={{ padding: "2rem" }}>
+                  <OrganizationData
+                    data={organizationData}
+                    onHelpClicked={() => setIsModalvisible(true)}
+                  />
+                </div>
+                <div className="sidebar-right">
+                  <h2>Recent Searched Companies</h2>
+                  <hr
+                    style={{
+                      width: "100%",
+                      borderColor: "hsl(249, 65%, 65%)",
+                      marginBottom: "1.5rem",
+                    }}
+                  />
+                  {recentSearch.slice(0, 10).map((organization, index) => (
+                    <a
+                      align="start"
+                      key={index}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        history.push(`/${organization?.organization_id}`);
+                        history.go(0);
+                      }}
+                    >
+                      {organization.organization_name}
+                    </a>
+                  ))}
                 </div>
               </div>
             </div>
-          )
-        )}
-      </div>
-      <QueryModal
-        setIsModalvisible={setIsModalvisible}
-        isModalVisible={isModalVisible}
-      />
+          )}
+          <QueryModal
+            setIsModalvisible={setIsModalvisible}
+            isModalVisible={isModalVisible}
+          />
+        </>
+      )}
     </>
   );
 };
