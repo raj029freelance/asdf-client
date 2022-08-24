@@ -37,9 +37,13 @@ const SideBarLayout = ({ children, loading, isOnCompanyDetails = false }) => {
           style={{ position: "fixed", height: "100vh", userSelect: "none" }}
           className="sidebar-left"
         >
-          <a href="#">
-            <img src={pageLogo} style={{ width: "100%", marginBottom: 50 }} />
-          </a>
+          <Link to="/">
+            <img
+              alt="drektory"
+              src={pageLogo}
+              style={{ width: "100%", marginBottom: 50 }}
+            />
+          </Link>
           {[
             { title: "Phone Numbers", id: "phone-details" },
             { title: "Contact Information", id: "contact-information" },
@@ -92,7 +96,7 @@ const SideBarLayout = ({ children, loading, isOnCompanyDetails = false }) => {
         </div>
 
         <div className="sidebar-right">
-          <h2>Comcast Contact Info</h2>
+          <h2>Drektory Contact Info</h2>
           <hr
             style={{
               width: "100%",
@@ -103,7 +107,7 @@ const SideBarLayout = ({ children, loading, isOnCompanyDetails = false }) => {
           <p>Information gathered by drektory researchers</p>
           <p>Drektory Phone Number</p>
           <p>BEST Drektory Live Chat </p>
-          <p>Drektory Help Desk Comcast on Twitter</p>
+          <p>Drektory Help Desk on Twitter</p>
 
           <br />
           <br />
