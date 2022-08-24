@@ -11,27 +11,4 @@
   a {
     margin-bottom: 10px;
   }
-
-  .title-wrapper {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    gap: 10px;
-  }
-
-  .back-icon {
-    padding: 14px;
-    display: grid;
-    place-content: center;
-    border-radius: 50%;
-    transition: background-color 0.3s;
-    user-select: none;
-    cursor: pointer;
-  }
-
-  .back-icon:hover {
-    background-color: hsl(249, 65%, 65%);
-    color: white;
-  }
 }

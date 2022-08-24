@@ -10,6 +10,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import { Helmet } from "react-helmet";
 import NotFound from "./pages/StaticPages/NotFound";
 import Blog from "./pages/Blog";
+import SingleBlog from "./pages/SingleBlog";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
           <Route path="/privacy-policy" component={PrivacyPolicy} />
           <Route path="/contact" component={ContactUs} />
           <Route path="/terms" component={TermsOfService} />
-          <Route path="/blog/:id" component={Blog} />
+          <Route path="/blog/:id" component={SingleBlog} />
           <Route path="/blog" component={Blog} />
           <Route path="/not-found" component={NotFound} />
           <Route path="/:id" component={CompanyDetail} />
