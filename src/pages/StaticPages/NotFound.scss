@@ -1,0 +1,20 @@
+.searchSection {
+  min-height: 100vh;
+  background-image: url(https://assets.gethuman.com/img/blingHeroBG2.png),
+   linear-gradient(-44deg, #5f49d9 0, #131613a8 96%);
+  background-position: center bottom, bottom;
+  background-repeat: no-repeat, no-repeat;
+  background-size: 100% auto, cover;
+  color: #fff;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 6rem;
+
+}
+.ant-select-show-search.ant-select:not(.ant-select-customize-input)
+  .ant-select-selector {
+  height: inherit;
+}

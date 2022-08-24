@@ -27,7 +27,7 @@ function ContactUs() {
       <div className="footer">
         <Link to="/">Home</Link>
         <Link to="/terms">Terms and Conditions</Link>
-        <Link to="/privacy_policy">Privacy Policy</Link>
+        <Link to="/privacy-policy">Privacy Policy</Link>
         <span>@ Get Human</span>
       </div>
     </div>

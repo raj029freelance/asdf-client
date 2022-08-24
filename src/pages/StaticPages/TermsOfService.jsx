@@ -78,9 +78,7 @@ function TermsOfService() {
           <li>Redistribute content from {websiteName}</li>
         </ul>
 
-        <p>
-          This Agreement shall begin on the date hereof.
-        </p>
+        <p>This Agreement shall begin on the date hereof.</p>
 
         <p>
           Parts of this website offer an opportunity for users to post and
@@ -326,7 +324,7 @@ function TermsOfService() {
       <div className="footer">
         <Link to="/">Home</Link>
         <Link to="/contact">Contact Us</Link>
-        <Link to="/privacy_policy">Privacy Policy</Link>
+        <Link to="/privacy-policy">Privacy Policy</Link>
         <span>@ Get Human</span>
       </div>
     </div>
