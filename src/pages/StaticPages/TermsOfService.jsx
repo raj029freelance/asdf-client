@@ -325,7 +325,7 @@ function TermsOfService() {
         <Link to="/">Home</Link>
         <Link to="/contact">Contact Us</Link>
         <Link to="/privacy-policy">Privacy Policy</Link>
-        <span>@ Get Human</span>
+        <span>&copy; Drektory</span>
       </div>
     </div>
   );

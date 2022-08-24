@@ -234,7 +234,7 @@ function PrivacyPolicy() {
         <Link to="/">Home</Link>
         <Link to="/contact">Contact Us</Link>
         <Link to="/terms">Terms and Conditions</Link>
-        <span>@ Get Human</span>
+        <span>&copy; Drektory</span>
       </div>
     </div>
   );

@@ -89,7 +89,21 @@ const ListOfBlogs = ({ data }) => {
   const history = useHistory();
   return (
     <>
-      <h1>Our Blogs</h1>
+      <h1>Step By Step Guides for Solving Drektory Issues</h1>
+      <p>
+        Instructions to help with popular customer service issues and our latest
+        newsfeed
+      </p>
+
+      <br />
+      <h2>Our Latest Blogs</h2>
+      <hr
+        style={{
+          width: "100%",
+          borderColor: "hsl(249, 65%, 65%)",
+          marginBottom: "1.5rem",
+        }}
+      />
       {data.map((faq, index) => (
         <a
           onClick={(e) => {

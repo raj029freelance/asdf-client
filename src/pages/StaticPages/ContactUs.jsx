@@ -28,7 +28,7 @@ function ContactUs() {
         <Link to="/">Home</Link>
         <Link to="/terms">Terms and Conditions</Link>
         <Link to="/privacy-policy">Privacy Policy</Link>
-        <span>@ Get Human</span>
+        <span>&copy; Drektory</span>
       </div>
     </div>
   );

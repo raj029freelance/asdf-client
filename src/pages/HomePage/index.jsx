@@ -13,7 +13,7 @@ const HomePage = () => {
   const [subTitle, setSubTitle] = useState(
     "Get a rep on the phone faster & get better help."
   );
-
+  const [pageLogo, setPageLogo] = useState("");
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/pageControl`)
@@ -21,6 +21,8 @@ const HomePage = () => {
         const pageData = res.data.data.pageData;
         setTitle(pageData.title);
         setSubTitle(pageData.subtitle);
+        setPageLogo(pageData.siteLogo);
+
         let link = document.querySelector("link[rel~='icon']");
         if (!link) {
           link = document.createElement("link");
@@ -36,6 +38,11 @@ const HomePage = () => {
       <Helmet>
         <title>{title}</title>
       </Helmet>
+      <div className="pageHeader">
+        <a href="/">
+          <img src={pageLogo} />
+        </a>
+      </div>
       <div className="homePageWrapper">
         <div className="searchSection">
           <div className="search-elements">
@@ -51,7 +58,7 @@ const HomePage = () => {
           <Link to="/contact">Contact Us</Link>
           <Link to="/terms">Terms and Conditions</Link>
           <Link to="/privacy-policy">Privacy Policy</Link>
-          <span>@ Get Human</span>
+          <span>&copy; Drektory</span>
         </div>
       </div>
     </>
