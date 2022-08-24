@@ -92,6 +92,7 @@ const ListOfBlogs = ({ data }) => {
           onClick={(e) => {
             e.preventDefault();
             history.push(`/blog/${faq._id}`);
+            history.go(0);
           }}
           style={{ fontSize: "1rem" }}
           key={index}
