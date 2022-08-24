@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "./index.scss";
-import ReactLoading from "react-loading";
 import axios from "axios";
+import { Skeleton } from "antd";
 
 const SideBarLayout = ({ children, loading, isOnCompanyDetails = false }) => {
   const [isRecentsLoading, setRecentsLoading] = useState(true);
   const [recentSearch, setRecentSearch] = useState();
   const history = useHistory();
-  const [pageLogo, setPageLogo] = useState("");
+  const [pageLogo, setPageLogo] = useState();
 
   useEffect(() => {
     axios
@@ -19,10 +19,7 @@ const SideBarLayout = ({ children, loading, isOnCompanyDetails = false }) => {
 
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/pageControl`)
-      .then((res) => {
-        const pageData = res.data.data.pageData;
-        setPageLogo(pageData.siteLogo);
-      })
+      .then((res) => setPageLogo(res.data.data.pageData.siteLogo))
       .catch(() => {});
   }, []);
 
@@ -38,11 +35,15 @@ const SideBarLayout = ({ children, loading, isOnCompanyDetails = false }) => {
           className="sidebar-left"
         >
           <Link to="/">
-            <img
-              alt="drektory"
-              src={pageLogo}
-              style={{ width: "100%", marginBottom: 50 }}
-            />
+            {pageLogo ? (
+              <img
+                alt="drektory"
+                src={pageLogo}
+                style={{ width: "100%", marginBottom: 50 }}
+              />
+            ) : (
+              <Skeleton.Input active style={{ marginBottom: "2rem" }} />
+            )}
           </Link>
           {[
             { title: "Phone Numbers", id: "phone-details" },
@@ -86,9 +87,13 @@ const SideBarLayout = ({ children, loading, isOnCompanyDetails = false }) => {
         <div className="content" style={{ padding: "2rem" }}>
           {loading ? (
             <div
-              style={{ height: "100vh", display: "grid", placeItems: "center" }}
+              style={{
+                height: "100vh",
+                display: "flex",
+                flexDirection: "column",
+              }}
             >
-              <ReactLoading type="bars" color="#5f49d9" className="posCenter" />
+              <Skeleton active paragraph={{ rows: 20 }} />
             </div>
           ) : (
             children
@@ -121,9 +126,16 @@ const SideBarLayout = ({ children, loading, isOnCompanyDetails = false }) => {
           />
           {isRecentsLoading ? (
             <div
-              style={{ display: "grid", placeItems: "center", width: "100%" }}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "1rem",
+                width: "100%",
+              }}
             >
-              <ReactLoading type="bars" color="#5f49d9" />
+              {[...Array(4)].map(() => (
+                <Skeleton.Input block size="small" active />
+              ))}
             </div>
           ) : (
             recentSearch &&

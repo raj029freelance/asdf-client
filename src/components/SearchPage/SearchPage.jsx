@@ -5,29 +5,28 @@ import axios from "axios";
 import DebounceSelect from "../DebounceSelect/DebounceSelect";
 
 async function fetchOrganizationList(username) {
-  console.log('fetching user', username);
+  console.log("fetching user", username);
   return axios
-  .get(`${process.env.REACT_APP_BACKEND_URL}/organizations/?name=${username}`)
-  .then(function ({data}) {
-     const structure =data.data.organizations.map((organization)=>({
-      label: `${organization.CompanyName}`,
-      value: organization._id,
-    }))
-    return structure
-  });
+    .get(`${process.env.REACT_APP_BACKEND_URL}/organizations/?name=${username}`)
+    .then(function ({ data }) {
+      const structure = data.data.organizations.map((organization) => ({
+        label: `${organization.CompanyName}`,
+        value: organization._id,
+      }));
+      return structure;
+    });
 }
 const SearchPage = () => {
-
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
 
   return (
     <DebounceSelect
-    value={value} 
-    fetchOptions={fetchOrganizationList}
-    onChange={(newValue) => {
-      setValue(newValue);
-    }}
-  />
+      value={value}
+      fetchOptions={fetchOrganizationList}
+      onChange={(newValue) => {
+        setValue(newValue);
+      }}
+    />
   );
 };
 

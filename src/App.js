@@ -1,4 +1,3 @@
-import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import "antd/dist/antd.min.css";
@@ -16,7 +15,7 @@ function App() {
   return (
     <div className="App">
       <Helmet>
-        <title>App Title</title>
+        <title>Drektory</title>
       </Helmet>
       <ScrollToTop>
         <Switch>

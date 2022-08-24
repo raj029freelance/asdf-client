@@ -5,6 +5,7 @@ import RecentSearch from "../../components/RecentSearch/RecentSearch";
 import SearchPage from "../../components/SearchPage/SearchPage";
 import "./index.scss";
 import axios from "axios";
+import pageLogo from "../../assets/logo.png";
 
 const HomePage = () => {
   const [title, setTitle] = useState(
@@ -13,7 +14,6 @@ const HomePage = () => {
   const [subTitle, setSubTitle] = useState(
     "Get a rep on the phone faster & get better help."
   );
-  const [pageLogo, setPageLogo] = useState("");
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/pageControl`)
@@ -21,7 +21,6 @@ const HomePage = () => {
         const pageData = res.data.data.pageData;
         setTitle(pageData.title);
         setSubTitle(pageData.subtitle);
-        setPageLogo(pageData.siteLogo);
 
         let link = document.querySelector("link[rel~='icon']");
         if (!link) {
@@ -40,7 +39,7 @@ const HomePage = () => {
       </Helmet>
       <div className="pageHeader">
         <a href="/">
-          <img src={pageLogo} />
+          <img alt="drektory" src={pageLogo} />
         </a>
       </div>
       <div className="homePageWrapper">
