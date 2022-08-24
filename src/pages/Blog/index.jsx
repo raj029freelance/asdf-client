@@ -5,7 +5,6 @@ import "./index.scss";
 import { Helmet } from "react-helmet";
 import SideBarLayout from "../SidebarLayout";
 import { useHistory, useParams } from "react-router-dom";
-import { ArrowLeftOutlined } from "antd";
 
 const Blog = () => {
   const { id } = useParams();
@@ -70,7 +69,8 @@ const BlogContent = ({ data }) => {
         <div
           className="back-icon"
           onClick={() => {
-            history.goBack();
+            history.push("/blog");
+            history.go(0);
           }}
         >
           <span class="material-symbols-outlined">arrow_back</span>
