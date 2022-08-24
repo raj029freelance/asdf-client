@@ -55,19 +55,22 @@ const CompanyDetail = () => {
       ) : (
         <>
           {organizationData && (
-            <div>
+            <div style={{ display: "flex", flexDirection: "column" }}>
               <div className="nav">
                 <h1>Drektory</h1>
               </div>
               <div className="details-wrapper">
-                <div className="sidebar-left">
+                <div
+                  style={{ position: "fixed", height: "100vh" }}
+                  className="sidebar-left"
+                >
                   <p>Phone Numbers</p>
                   <p>Contact Information</p>
                   <p>Customer Service</p>
                   <p>Fix Common Issues</p>
                   <p>Local postings</p>
                 </div>
-                <div style={{ padding: "2rem" }}>
+                <div className="content" style={{ padding: "2rem" }}>
                   <OrganizationData
                     data={organizationData}
                     onHelpClicked={() => setIsModalvisible(true)}
@@ -97,12 +100,18 @@ const CompanyDetail = () => {
                   ))}
                 </div>
               </div>
+              <div className="footer">
+                <Link to="/contact">Contact Us</Link>
+                <Link to="/terms">Terms and Conditions</Link>
+                <Link to="/privacy-policy">Privacy Policy</Link>
+                <span>@ Get Human</span>
+              </div>
             </div>
           )}
           <QueryModal
             setIsModalvisible={setIsModalvisible}
             isModalVisible={isModalVisible}
-          />
+          />{" "}
         </>
       )}
     </>

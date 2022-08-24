@@ -41,7 +41,7 @@ function OrganizationData({ data, onHelpClicked }) {
   ];
 
   return (
-    <>
+    <div className="organization-wrapper">
       <div className="title-wrapper" style={{ marginBottom: "1rem" }}>
         <h1 align="start">{`${data.CompanyName} Phone Number`}</h1>
         <p align="start">{`${data.CompanyName} ${data.DepartmentYourCalling} with Drektory`}</p>
@@ -82,7 +82,7 @@ function OrganizationData({ data, onHelpClicked }) {
           columns={cols}
         />
       </div>
-    </>
+    </div>
   );
 }
 
