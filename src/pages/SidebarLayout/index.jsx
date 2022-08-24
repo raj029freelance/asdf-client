@@ -1,33 +1,64 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "./index.scss";
+import ReactLoading from "react-loading";
+import axios from "axios";
 
-const SideBarLayout = ({ children, recentSearches }) => {
+const SideBarLayout = ({ children, loading, isOnCompanyDetails = false }) => {
+  const [isRecentsLoading, setRecentsLoading] = useState(true);
+  const [recentSearch, setRecentSearch] = useState();
   const history = useHistory();
+  const [pageLogo, setPageLogo] = useState("");
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_BACKEND_URL}/recentSearch/`)
+      .then((res) => setRecentSearch(res.data?.searches))
+      .catch(() => history.push("/not-found"))
+      .finally(() => setRecentsLoading(false));
+
+    axios
+      .get(`${process.env.REACT_APP_BACKEND_URL}/pageControl`)
+      .then((res) => {
+        const pageData = res.data.data.pageData;
+        setPageLogo(pageData.siteLogo);
+      })
+      .catch(() => {});
+  }, []);
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <div className="nav">
         <h1>Drektory</h1>
       </div>
+
       <div className="details-wrapper">
         <div
           style={{ position: "fixed", height: "100vh", userSelect: "none" }}
           className="sidebar-left"
         >
-          {["Phone Numbers", "Contact Information", "Customer Service"].map(
-            (item, index) => (
-              <p
-                key={index}
-                onClick={(e) => {
-                  e.preventDefault();
-                  history.push("/");
-                }}
-              >
-                {item}
-              </p>
-            )
-          )}
+          <img src={pageLogo} style={{ width: "100%", marginBottom: 50 }} />
+          {[
+            { title: "Phone Numbers", id: "phone-details" },
+            { title: "Contact Information", id: "contact-information" },
+            { title: "Company Details", id: "company-details" },
+            { title: "Customer Service", id: "company-details" },
+          ].map(({ title, id }, index) => (
+            <p
+              key={index}
+              onClick={(e) => {
+                e.preventDefault();
+                if (isOnCompanyDetails) {
+                  const target = document.getElementById(id);
+                  target.scrollIntoView();
+                  return;
+                }
+                history.push("/");
+              }}
+            >
+              {title}
+            </p>
+          ))}
           <p
             onClick={(e) => {
               e.preventDefault();
@@ -45,9 +76,19 @@ const SideBarLayout = ({ children, recentSearches }) => {
             Local postings
           </p>
         </div>
+
         <div className="content" style={{ padding: "2rem" }}>
-          {children}
+          {loading ? (
+            <div
+              style={{ height: "100vh", display: "grid", placeItems: "center" }}
+            >
+              <ReactLoading type="bars" color="#5f49d9" className="posCenter" />
+            </div>
+          ) : (
+            children
+          )}
         </div>
+
         <div className="sidebar-right">
           <h2>Comcast Contact Info</h2>
           <hr
@@ -72,24 +113,31 @@ const SideBarLayout = ({ children, recentSearches }) => {
               marginBottom: "1.5rem",
             }}
           />
-          {recentSearches.slice(0, 10).map((organization, index) => (
-            <a
-              align="start"
-              key={index}
-              style={{ marginBottom: 15 }}
-              onClick={(e) => {
-                e.preventDefault();
-                history.push(`/${organization?.organization_id}`);
-                history.go(0);
-              }}
+          {isRecentsLoading ? (
+            <div
+              style={{ display: "grid", placeItems: "center", width: "100%" }}
             >
-              {organization.organization_name.length >= 30
-                ? organization.organization_name.slice(0, 30) + ".."
-                : organization.organization_name}
-            </a>
-          ))}
+              <ReactLoading type="bars" color="#5f49d9" />
+            </div>
+          ) : (
+            recentSearch &&
+            recentSearch.map((organization, index) => (
+              <p
+                align="start"
+                key={index}
+                onClick={(e) => {
+                  e.preventDefault();
+                  history.push(`/${organization?.organization_id}`);
+                  if (isOnCompanyDetails) history.go(0);
+                }}
+              >
+                {organization.organization_name}
+              </p>
+            ))
+          )}
         </div>
       </div>
+
       <div className="footer">
         <Link to="/contact">Contact Us</Link>
         <Link to="/terms">Terms and Conditions</Link>

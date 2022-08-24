@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import ReactLoading from "react-loading";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import QueryModal from "../../components/queryModal/QueryModal";
@@ -16,21 +15,12 @@ const CompanyDetail = () => {
   const [isModalVisible, setIsModalvisible] = useState(false);
   const [pageTitle, setPageTitle] = useState("React App");
 
-  const [recentSearch, setRecentSearch] = useState([]);
-
   const history = useHistory();
 
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/organizations/${id}`)
-      .then((orgResp) => {
-        axios
-          .get(`${process.env.REACT_APP_BACKEND_URL}/recentSearch/`)
-          .then((resp) => {
-            setRecentSearch(resp.data?.searches);
-            setOrganizationData(orgResp.data?.data?.organization);
-          });
-      })
+      .then((orgResp) => setOrganizationData(orgResp.data?.data?.organization))
       .catch(() => history.replace("/not-found"))
       .finally(() => setIsLoading(false));
   }, []);
@@ -49,26 +39,19 @@ const CompanyDetail = () => {
       <Helmet>
         <title>{pageTitle}</title>
       </Helmet>
-      {isLoading ? (
-        <div style={{ height: "100vh", display: "grid", placeItems: "center" }}>
-          <ReactLoading type="bars" color="#5f49d9" className="posCenter" />
-        </div>
-      ) : (
-        <>
-          {organizationData && (
-            <SideBarLayout recentSearches={recentSearch}>
-              <OrganizationData
-                data={organizationData}
-                onHelpClicked={() => setIsModalvisible(true)}
-              />
-            </SideBarLayout>
-          )}
-          <QueryModal
-            setIsModalvisible={setIsModalvisible}
-            isModalVisible={isModalVisible}
-          />{" "}
-        </>
-      )}
+      <SideBarLayout isOnCompanyDetails={true} loading={isLoading}>
+        {organizationData && (
+          <OrganizationData
+            data={organizationData}
+            onHelpClicked={() => setIsModalvisible(true)}
+          />
+        )}
+      </SideBarLayout>
+
+      <QueryModal
+        setIsModalvisible={setIsModalvisible}
+        isModalVisible={isModalVisible}
+      />
     </>
   );
 };

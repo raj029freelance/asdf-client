@@ -41,12 +41,12 @@ function OrganizationData({ data, onHelpClicked }) {
   ];
 
   return (
-    <div className="organization-wrapper">
+    <div id="phone-details" className="organization-wrapper">
       <div className="title-wrapper" style={{ marginBottom: "1rem" }}>
         <h1 align="start">{`${data.CompanyName} Phone Number`}</h1>
         <p align="start">{`${data.CompanyName} ${data.DepartmentYourCalling} with Drektory`}</p>
       </div>
-      <Card>
+      <Card id="contact-information">
         <div>
           <div className="section">
             <div>
@@ -70,7 +70,7 @@ function OrganizationData({ data, onHelpClicked }) {
         </div>
       </Card>
       <ArticleDescriptionCard overview={data.description} />
-      <div style={{ padding: "2rem 0 2rem 0" }}>
+      <div id="company-details" style={{ padding: "2rem 0 2rem 0" }}>
         <div className="title-wrapper" style={{ marginBottom: "1rem" }}>
           <h1>Company Details</h1>
         </div>
