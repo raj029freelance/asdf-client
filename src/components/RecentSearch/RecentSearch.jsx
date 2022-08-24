@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./RecentSearch.scss";
-import { Skeleton, Space } from "antd";
+import { Skeleton } from "antd";
 
 const RecentSearch = () => {
-  const [recentSearch, setRecentSearch] = useState([]);
+  const [recentSearch, setRecentSearch] = useState();
 
   useEffect(() => {
     axios
@@ -14,6 +14,7 @@ const RecentSearch = () => {
       .then((resp) => setRecentSearch(resp.data?.searches))
       .catch(() => {});
   }, []);
+
 
   return (
     <div className="searchesWrapper">
