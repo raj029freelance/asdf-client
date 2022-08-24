@@ -27,7 +27,18 @@ const Blog = () => {
       <SideBarLayout loading={isLoading}>
         {faqData && (
           <div className="blog-wrapper">
-            <h1>Our Blogs</h1>
+            <h1>Step By Step Guides for Solving Drektory Issues</h1>
+            <p>Instructions to help with popular customer service issues</p>
+            <hr
+              style={{
+                width: "100%",
+                borderColor: "hsl(249, 65%, 65%)",
+                marginBottom: "1.5rem",
+              }}
+            />
+            <h2>Our Latest Blogs</h2>
+            <br />
+
             {faqData.map((faq, index) => (
               <Link
                 key={index}

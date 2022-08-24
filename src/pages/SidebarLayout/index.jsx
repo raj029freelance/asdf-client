@@ -37,7 +37,9 @@ const SideBarLayout = ({ children, loading, isOnCompanyDetails = false }) => {
           style={{ position: "fixed", height: "100vh", userSelect: "none" }}
           className="sidebar-left"
         >
-          <img src={pageLogo} style={{ width: "100%", marginBottom: 50 }} />
+          <a href="#">
+            <img src={pageLogo} style={{ width: "100%", marginBottom: 50 }} />
+          </a>
           {[
             { title: "Phone Numbers", id: "phone-details" },
             { title: "Contact Information", id: "contact-information" },
