@@ -40,7 +40,10 @@ const SingleBlog = () => {
               </div>
               <h1 style={{ marginBottom: 0 }}>{singleBlog.title}</h1>
             </div>
-            <p dangerouslySetInnerHTML={{ __html: singleBlog.description }} />
+            <p
+              dangerouslySetInnerHTML={{ __html: singleBlog.description }}
+              className="description"
+            />
           </div>
         )}
       </SideBarLayout>

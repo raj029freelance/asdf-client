@@ -35,18 +35,21 @@ const HomePage = () => {
   return (
     <>
       <Helmet>
-        <title>{title}</title>
+        <title>How to Fix Common Customer Service Problems</title>
       </Helmet>
       <div className="pageHeader">
         <a href="/">
-          <img alt="drektory" src={pageLogo} />
+          <img alt="drektory" src="/logo.png" />
         </a>
       </div>
       <div className="homePageWrapper">
         <div className="searchSection">
           <div className="search-elements">
-            <h1>{title}</h1>
-            <h2>{subTitle}</h2>
+            <h1>How to Fix Common Customer Service Problems</h1>
+            <h2>
+              Free, step-by-step expert guides for fixing popular customer
+              issues for any company
+            </h2>
           </div>
           <div className="autoCompleteSection">
             <SearchPage />

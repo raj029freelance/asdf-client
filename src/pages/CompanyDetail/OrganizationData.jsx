@@ -50,7 +50,9 @@ function OrganizationData({ data, onHelpClicked }) {
         <div>
           <div className="section">
             <div>
-              <h1 align="start">{data.PhoneNumber} </h1>
+              <a href={`tel:${data.PhoneNumber}`} className="phoneNumber-hover">
+                <h1 align="start">{data.PhoneNumber} </h1>
+              </a>
               <p align="start">{data.DepartmentYourCalling}</p>
             </div>
             <div>
