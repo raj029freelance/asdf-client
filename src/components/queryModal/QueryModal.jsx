@@ -12,7 +12,6 @@ const QueryModal = ({ setIsModalvisible, isModalVisible }) => {
   const [phoneErr, setPhoneErr] = useState("");
 
   function phonenumber(inputtxt) {
-    console.log(inputtxt, "input Text");
     var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
     if (phoneno.test(inputtxt)) {
       setPhoneErr("");
@@ -50,12 +49,7 @@ const QueryModal = ({ setIsModalvisible, isModalVisible }) => {
           name,
           phoneNumber,
         })
-        .then((resp) => {
-          console.log(resp, "Successfull");
-        })
-        .catch((err) => {
-          console.log(err);
-        })
+      
         .finally(() => {
           setIsModalvisible(false);
         });

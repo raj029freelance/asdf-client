@@ -146,7 +146,7 @@ const SideBarLayout = ({ children, loading, isOnCompanyDetails = false }) => {
                 key={index}
                 onClick={(e) => {
                   e.preventDefault();
-                  history.push(`/${organization?.organization_id}`);
+                  history.push(`/phone-number/${organization?.slug}`);
                   if (isOnCompanyDetails) history.go(0);
                 }}
               >

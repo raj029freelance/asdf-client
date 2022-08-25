@@ -42,7 +42,7 @@ const Blog = () => {
             {faqData.map((faq, index) => (
               <Link
                 key={index}
-                to={`/blog/${faq._id}`}
+                to={`/blog/${faq.slug}`}
                 style={{ fontSize: "1rem" }}
               >
                 {faq.title}

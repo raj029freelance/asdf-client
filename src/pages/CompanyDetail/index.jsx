@@ -31,6 +31,7 @@ const CompanyDetail = () => {
     axios.post(`${process.env.REACT_APP_BACKEND_URL}/recentSearch/`, {
       organization_name: organizationData?.CompanyName,
       organization_id: organizationData?._id,
+      slug: organizationData?.slug,
     });
   }, [organizationData]);
 

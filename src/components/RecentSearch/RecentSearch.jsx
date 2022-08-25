@@ -15,14 +15,13 @@ const RecentSearch = () => {
       .catch(() => {});
   }, []);
 
-
   return (
     <div className="searchesWrapper">
       <h2>Recent Searches</h2>
       <div className="layout">
         {recentSearch
           ? recentSearch.map((organization, index) => (
-              <Link key={index} to={`/${organization?.organization_id}`}>
+              <Link key={index} to={`/phone-number/${organization?.slug}`}>
                 {organization.organization_name}
               </Link>
             ))

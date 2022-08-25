@@ -26,7 +26,7 @@ function App() {
           <Route path="/blog/:id" component={SingleBlog} />
           <Route path="/blog" component={Blog} />
           <Route path="/not-found" component={NotFound} />
-          <Route path="/:id" component={CompanyDetail} />
+          <Route path="/phone-number/:id" component={CompanyDetail} />
           <Redirect to="/not-found" />
         </Switch>
       </ScrollToTop>

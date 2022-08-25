@@ -8,7 +8,6 @@ function DebounceSelect({ fetchOptions, debounceTimeout = 800, ...props }) {
   const [options, setOptions] = React.useState([]);
   const fetchRef = React.useRef(0);
   const history = useHistory();
-  console.log(options, "state");
   const debounceFetcher = React.useMemo(() => {
     const loadOptions = (value) => {
       fetchRef.current += 1;
@@ -31,7 +30,7 @@ function DebounceSelect({ fetchOptions, debounceTimeout = 800, ...props }) {
     return debounce(loadOptions, debounceTimeout);
   }, [fetchOptions, debounceTimeout]);
   const selectOrganizationHandler = (e) => {
-    history.push(`/${e}`);
+    history.push(`/phone-number/${e}`);
   };
   return (
     <div className="debounceSelect" style={{ marginTop: "3px" }}>
