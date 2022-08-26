@@ -9,7 +9,7 @@ import OrganizationData from "./OrganizationData";
 import SideBarLayout from "../SidebarLayout";
 
 const CompanyDetail = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [organizationData, setOrganizationData] = useState();
   const [isModalVisible, setIsModalvisible] = useState(false);
@@ -19,7 +19,7 @@ const CompanyDetail = () => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/organizations/${id}`)
+      .get(`${process.env.REACT_APP_BACKEND_URL}/organizations/slug/${slug}`)
       .then((orgResp) => setOrganizationData(orgResp.data?.data?.organization))
       .catch(() => history.replace("/not-found"))
       .finally(() => setIsLoading(false));

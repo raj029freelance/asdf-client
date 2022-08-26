@@ -23,10 +23,10 @@ function App() {
           <Route path="/privacy-policy" component={PrivacyPolicy} />
           <Route path="/contact" component={ContactUs} />
           <Route path="/terms" component={TermsOfService} />
-          <Route path="/blog/:id" component={SingleBlog} />
+          <Route path="/blog/:slug" component={SingleBlog} />
           <Route path="/blog" component={Blog} />
           <Route path="/not-found" component={NotFound} />
-          <Route path="/phone-number/:id" component={CompanyDetail} />
+          <Route path="/phone-number/:slug" component={CompanyDetail} />
           <Redirect to="/not-found" />
         </Switch>
       </ScrollToTop>

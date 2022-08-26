@@ -6,7 +6,7 @@ import SideBarLayout from "../SidebarLayout";
 import { useHistory, useParams } from "react-router-dom";
 
 const SingleBlog = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
 
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
@@ -14,7 +14,7 @@ const SingleBlog = () => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/faq/${id}`)
+      .get(`${process.env.REACT_APP_BACKEND_URL}/faq/${slug}`)
       .then((res) => setSingleBlog(res.data?.data[0]))
       .catch(() => history.push("/not-found"))
       .finally(() => setIsLoading(false));
