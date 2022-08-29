@@ -5,15 +5,10 @@ import RecentSearch from "../../components/RecentSearch/RecentSearch";
 import SearchPage from "../../components/SearchPage/SearchPage";
 import "./index.scss";
 import axios from "axios";
-import pageLogo from "../../assets/logo.png";
 
 const HomePage = () => {
-  const [title, setTitle] = useState(
-    "Fix Your Customer Service Issues Faster."
-  );
-  const [subTitle, setSubTitle] = useState(
-    "Get a rep on the phone faster & get better help."
-  );
+  const [title, setTitle] = useState("");
+  const [subTitle, setSubTitle] = useState("");
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/pageControl`)
@@ -35,7 +30,7 @@ const HomePage = () => {
   return (
     <>
       <Helmet>
-        <title>How to Fix Common Customer Service Problems</title>
+        <title>{`${title ? title : "Drektory"}`}</title>
       </Helmet>
       <div className="pageHeader">
         <a href="/">
@@ -45,11 +40,8 @@ const HomePage = () => {
       <div className="homePageWrapper">
         <div className="searchSection">
           <div className="search-elements">
-            <h1>How to Fix Common Customer Service Problems</h1>
-            <h2>
-              Free, step-by-step expert guides for fixing popular customer
-              issues for any company
-            </h2>
+            <h1>{title}</h1>
+            <h2>{subTitle}</h2>
           </div>
           <div className="autoCompleteSection">
             <SearchPage />
@@ -57,6 +49,7 @@ const HomePage = () => {
         </div>
         <RecentSearch />
         <div className="footer">
+          <Link to="/blog">Our Blog</Link>
           <Link to="/contact">Contact Us</Link>
           <Link to="/terms">Terms and Conditions</Link>
           <Link to="/privacy-policy">Privacy Policy</Link>

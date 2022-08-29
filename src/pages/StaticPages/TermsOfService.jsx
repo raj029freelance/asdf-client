@@ -323,6 +323,7 @@ function TermsOfService() {
       </Card>
       <div className="footer">
         <Link to="/">Home</Link>
+        <Link to="/blog">Our Blog</Link>
         <Link to="/contact">Contact Us</Link>
         <Link to="/privacy-policy">Privacy Policy</Link>
         <span>&copy; Drektory</span>

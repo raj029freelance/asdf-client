@@ -26,7 +26,9 @@ const SideBarLayout = ({ children, loading, isOnCompanyDetails = false }) => {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <div className="nav">
-        <img alt="drektory" src={pageLogo} />
+        <Link to="/">
+          <img alt="Drektory" src={pageLogo} />
+        </Link>
         {/* <h1>Drektory</h1> */}
       </div>
 
@@ -158,6 +160,8 @@ const SideBarLayout = ({ children, loading, isOnCompanyDetails = false }) => {
       </div>
 
       <div className="footer">
+        <Link to="/">Home</Link>
+        <Link to="/blog">Our Blog</Link>
         <Link to="/contact">Contact Us</Link>
         <Link to="/terms">Terms and Conditions</Link>
         <Link to="/privacy-policy">Privacy Policy</Link>
