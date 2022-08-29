@@ -26,10 +26,7 @@ const SideBarLayout = ({ children, loading, isOnCompanyDetails = false }) => {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <div className="nav">
-        <Link to="/">
-          <img alt="Drektory" src={pageLogo} />
-        </Link>
-        {/* <h1>Drektory</h1> */}
+        <Link to="/">{pageLogo && <img alt="Drektory" src={pageLogo} />}</Link>
       </div>
 
       <div className="details-wrapper">
