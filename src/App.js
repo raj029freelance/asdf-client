@@ -10,10 +10,14 @@ import { Helmet } from "react-helmet";
 import NotFound from "./pages/StaticPages/NotFound";
 import Blog from "./pages/Blog";
 import SingleBlog from "./pages/SingleBlog";
+import AddSubmissionForm from "./pages/AddSubmissionForm";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
     <div className="App">
+      <ToastContainer />
       <Helmet>
         <title>Drektory</title>
       </Helmet>
@@ -25,6 +29,7 @@ function App() {
           <Route path="/terms" component={TermsOfService} />
           <Route path="/blog/:slug" component={SingleBlog} />
           <Route path="/blog" component={Blog} />
+          <Route path="/new" component={AddSubmissionForm} />
           <Route path="/not-found" component={NotFound} />
           <Route path="/phone-number/:slug" component={CompanyDetail} />
           <Redirect to="/not-found" />

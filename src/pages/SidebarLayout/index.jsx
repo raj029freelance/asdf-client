@@ -4,7 +4,11 @@ import "./index.scss";
 import axios from "axios";
 import { Skeleton } from "antd";
 
-const SideBarLayout = ({ children, loading, isOnCompanyDetails = false }) => {
+const SideBarLayout = ({
+  children,
+  loading = false,
+  isOnCompanyDetails = false,
+}) => {
   const [isRecentsLoading, setRecentsLoading] = useState(true);
   const [recentSearch, setRecentSearch] = useState();
   const history = useHistory();
@@ -82,6 +86,14 @@ const SideBarLayout = ({ children, loading, isOnCompanyDetails = false }) => {
           >
             Local postings
           </p>
+          <p
+            onClick={(e) => {
+              e.preventDefault();
+              history.push("/new");
+            }}
+          >
+            Submit New Phone
+          </p>
         </div>
 
         <div className="content" style={{ padding: "2rem" }}>
@@ -133,8 +145,8 @@ const SideBarLayout = ({ children, loading, isOnCompanyDetails = false }) => {
                 width: "100%",
               }}
             >
-              {[...Array(4)].map(() => (
-                <Skeleton.Input block size="small" active />
+              {[...Array(4)].map((_, index) => (
+                <Skeleton.Input key={index} block size="small" active />
               ))}
             </div>
           ) : (

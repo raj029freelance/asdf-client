@@ -1,0 +1,76 @@
+.submit-form-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  a {
+    margin-bottom: 10px;
+  }
+}
+
+.organizationForm {
+  width: 100%;
+
+  .time-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+
+    @media (max-width: 1000px) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .checkbox-wrapper {
+      display: flex;
+      @media (max-width: 1000px) {
+        margin-bottom: 1rem;
+      }
+    }
+
+    .time-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-right: 1rem;
+      flex-direction: row;
+
+      p {
+        text-align: center;
+        margin-bottom: 0;
+        width: 100%;
+        @media (max-width: 1000px) {
+          width: auto;
+        }
+      }
+
+      .ant-picker-large {
+        width: 100%;
+      }
+
+      @media (max-width: 1000px) {
+        width: 100%;
+        align-items: flex-start;
+        flex-direction: column;
+        margin-bottom: 1rem;
+      }
+    }
+  }
+
+  .editor {
+    font-family: "ProximaNova-Regular";
+    padding: 24px 40px 24px 24px;
+    background: #ffff;
+    height: 350px;
+    max-height: calc(100vh - 149px);
+    overflow-y: auto;
+  }
+}
