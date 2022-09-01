@@ -1,78 +1,65 @@
-import React, { useState, useEffect } from "react";
-import "./index.scss";
-import { Helmet } from "react-helmet";
-import SideBarLayout from "../SidebarLayout";
-import { useHistory } from "react-router-dom";
-import { Form, Input, Select, Checkbox, Button } from "antd";
-import { TimePicker } from "antd";
-import "./index.scss";
-import * as Yup from "yup";
-import { useFormik } from "formik";
+import { Button, Checkbox, Form, Input, Select, TimePicker } from "antd";
+import axios from "axios";
 import { convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import React, { useState } from "react";
 import { Editor } from "react-draft-wysiwyg";
-import axios from "axios";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
-const { Option } = Select;
+import SideBarLayout from "../SidebarLayout";
+import "./index.scss";
 
 const initialState = {
   CompanyName: "",
   PhoneNumber: "",
   DepartmentYourCalling: "Customer Service",
-  CallBackAvailable: "NO",
-  CallPickedUpByARealPerson: "NO",
-  BestTimeToDail: "111",
-  serviceHours: 1,
-  serviceDays: 1,
-  CallCenterHours: `1 hour and 1 day`,
+  CallBackAvailable: false,
+  CallPickedUpByARealPerson: false,
+  BestTimeToDail: "",
+  serviceHours: 0,
+  serviceDays: 0,
 };
-const validationSchema = Yup.object().shape({
-  CompanyName: Yup.string().required("Company Name required"),
-  PhoneNumber: Yup.string().required("Phone Number required"),
-  DepartmentYourCalling: Yup.string().required(
-    "Enter Department you are calling"
-  ),
-  BestTimeToDail: Yup.string().required("Best Time to Dail required"),
-  serviceHours: Yup.string().required("Service Hours required"),
-  serviceDays: Yup.string().required("Service Days required"),
-});
 
 const AddSubmissionForm = () => {
-  const history = useHistory();
   const [editorState, setEditorState] = useState();
+  const [form] = Form.useForm();
 
-  const formik = useFormik({
-    initialValues: initialState,
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-      const htmlString = draftToHtml(
-        convertToRaw(editorState.getCurrentContent())
-      );
-      const formData = {
-        ...values,
-        CallCenterHours: `${values.serviceHours}hours , ${values.serviceDays}days`,
-        description: htmlString,
-      };
+  const handleFinish = (values) => {
+    const htmlString = draftToHtml(
+      convertToRaw(editorState.getCurrentContent())
+    );
+    const formData = {
+      ...values,
+      CallBackAvailable: values.CallBackAvailable ? "YES" : "NO",
+      CallPickedUpByARealPerson: values.CallPickedUpByARealPerson
+        ? "YES"
+        : "NO",
+      BestTimeToDail: values.BestTimeToDail.format("h:mm a"),
+      CallCenterHours: `${values.serviceHours} hours, ${values.serviceDays} days`,
+      description: htmlString,
+    };
 
-      let endpoint = `${process.env.REACT_APP_BACKEND_URL}/submissions`;
-      axios
-        .post(endpoint, formData, {})
-        .then(() => {
-          formik.resetForm();
-          toast.success("Request Submitted", {
-            autoClose: 2000,
-            pauseOnHover: false,
-          });
-        })
-        .catch(() => {
-          toast.error(`Error submitting request`, {
-            autoClose: 2000,
-            pauseOnHover: false,
-          });
+    console.log(formData);
+    let endpoint = `${process.env.REACT_APP_BACKEND_URL}/submissions`;
+    axios
+      .post(endpoint, formData, {})
+      .then(() => {
+        form.resetFields();
+        setEditorState(undefined);
+
+        toast.success("Request Submitted", {
+          autoClose: 2000,
+          pauseOnHover: false,
         });
-    },
-  });
+      })
+      .catch(() => {
+        toast.error(`Error submitting request`, {
+          autoClose: 2000,
+          pauseOnHover: false,
+        });
+      });
+  };
 
   return (
     <>
@@ -92,127 +79,86 @@ const AddSubmissionForm = () => {
           />
           <div className="organizationForm">
             <Form
+              form={form}
+              initialValues={initialState}
               name="basic"
-              labelCol={{ span: 8 }}
               layout="vertical"
               size="large"
-              onFinish={(e) => e.preventDefault()}
+              onFinish={handleFinish}
               autoComplete="off"
             >
-              <Form.Item required label="Company Name">
-                <Input
-                  size="large"
-                  type="text"
-                  name="CompanyName"
-                  value={formik.values.CompanyName}
-                  onChange={formik.handleChange}
-                  placeholder="Company Name"
-                />
-              </Form.Item>
-              <Form.Item required label="Phone Number">
-                <Input
-                  size="large"
-                  type="text"
-                  name="PhoneNumber"
-                  value={formik.values.PhoneNumber}
-                  onChange={formik.handleChange}
-                  placeholder="Phone Number"
-                />
+              <Form.Item
+                rules={[{ required: true }]}
+                name="CompanyName"
+                label="Company Name"
+              >
+                <Input type="text" placeholder="Company Name" />
               </Form.Item>
 
               <Form.Item
-                name="department"
-                label="Department your calling"
-                required
+                rules={[{ required: true }]}
+                name="PhoneNumber"
+                label="Phone Number"
               >
-                <Select
-                  placeholder="Enter Department you are calling"
-                  name="DepartmentYourCalling"
-                  value={formik.values.DepartmentYourCalling}
-                  onChange={formik.handleChange}
-                >
-                  <Option value="Customer Service">Customer Service</Option>
+                <Input type="text" placeholder="Phone Number" />
+              </Form.Item>
+
+              <Form.Item
+                name="DepartmentYourCalling"
+                label="Department your calling"
+                rules={[{ required: true }]}
+              >
+                <Select placeholder="Enter Department you are calling">
+                  <Select.Option value="Customer Service">
+                    Customer Service
+                  </Select.Option>
                 </Select>
               </Form.Item>
-              <Form.Item label="Service Hours" name="hour" required>
-                <Input
-                  size="large"
-                  type="number"
-                  name="serviceHours"
-                  value={formik.values.serviceHours}
-                  onChange={formik.handleChange}
-                  placeholder="Enter Hour"
-                  min={1}
-                  max={24}
-                />
-              </Form.Item>
-              <Form.Item label="Service Days" name="days" required>
-                <Input
-                  size="large"
-                  type="number"
-                  name="serviceDays"
-                  value={formik.values.serviceDays}
-                  onChange={formik.handleChange}
-                  placeholder="Enter days"
-                  min={1}
-                  max={7}
-                />
-              </Form.Item>
-              <div className="time-checkbox-wrapper">
-                <div className="time-wrapper">
-                  <p>Best Time to Dail</p>
-                  <TimePicker
-                    use12Hours
-                    format="h:mm a"
-                    onChange={(value) =>
-                      formik.setFieldValue(
-                        "BestTimeToDail",
-                        value.format("h:mm a")
-                      )
-                    }
-                  />
-                </div>
 
-                <div className="checkbox-wrapper">
-                  <Checkbox
-                    onChange={(e) =>
-                      formik.setFieldValue(
-                        "CallBackAvailable",
-                        `${e.target.checked ? "YES" : "NO"}`
-                      )
-                    }
-                  >
-                    CallBack Available
-                  </Checkbox>
-                  <Checkbox
-                    style={{ marginLeft: "0" }}
-                    onChange={(e) =>
-                      formik.setFieldValue(
-                        "CallPickedUpByARealPerson",
-                        `${e.target.checked ? "YES" : "NO"}`
-                      )
-                    }
-                  >
-                    Call Picked
-                  </Checkbox>
-                </div>
+              <Form.Item
+                name="serviceHours"
+                label="Service Hours"
+                rules={[{ required: true }]}
+              >
+                <Input type="number" placeholder="Enter Hour" />
+              </Form.Item>
+
+              <Form.Item
+                name="serviceDays"
+                label="Service Days"
+                rules={[{ required: true }]}
+              >
+                <Input size="large" type="number" placeholder="Enter days" />
+              </Form.Item>
+
+              <div className="time-checkbox-wrapper">
+                <Form.Item label="Best Time to Dail" name="BestTimeToDail">
+                  <TimePicker use12Hours format="h:mm a" />
+                </Form.Item>
+                <Form.Item name="CallBackAvailable" valuePropName="checked">
+                  <Checkbox>CallBack Available</Checkbox>
+                </Form.Item>
+                <Form.Item
+                  name="CallPickedUpByARealPerson"
+                  valuePropName="checked"
+                >
+                  <Checkbox style={{ marginLeft: "0" }}>Call Picked</Checkbox>
+                </Form.Item>
               </div>
+
+              <Editor
+                editorState={editorState}
+                editorClassName="editor"
+                onEditorStateChange={(editState) => {
+                  setEditorState(editState);
+                }}
+              />
+              <Form.Item>
+                <Button htmlType="submit" block type="primary">
+                  Submit Request
+                </Button>
+              </Form.Item>
             </Form>
-            <Editor
-              editorState={editorState}
-              editorClassName="editor"
-              onEditorStateChange={(editState) => {
-                setEditorState(editState);
-              }}
-            />
-            <Button
-              onClick={formik.handleSubmit}
-              block
-              size="large"
-              type="primary"
-            >
-              Submit Request
-            </Button>
           </div>
         </div>
       </SideBarLayout>
