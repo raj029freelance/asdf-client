@@ -1,8 +1,8 @@
+import { Skeleton } from "antd";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "./index.scss";
-import axios from "axios";
-import { Skeleton } from "antd";
 
 const SideBarLayout = ({
   children,
@@ -171,6 +171,7 @@ const SideBarLayout = ({
       <div className="footer">
         <Link to="/">Home</Link>
         <Link to="/blog">Our Blog</Link>
+        <Link to="/new">Submit new Phone</Link>
         <Link to="/contact">Contact Us</Link>
         <Link to="/terms">Terms and Conditions</Link>
         <Link to="/privacy-policy">Privacy Policy</Link>
