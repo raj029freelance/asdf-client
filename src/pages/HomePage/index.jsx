@@ -40,8 +40,8 @@ const HomePage = () => {
       <div className="homePageWrapper">
         <div className="searchSection">
           <div className="search-elements">
-            <h1>{title}</h1>
-            <h2>{subTitle}</h2>
+            <h1>Drektory - Search for Your Number</h1>
+            <h2>Find and connect to a customer rep.</h2>
           </div>
           <div className="autoCompleteSection">
             <SearchPage />
