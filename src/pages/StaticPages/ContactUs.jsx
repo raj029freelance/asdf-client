@@ -1,4 +1,4 @@
-import { Input, Button } from "antd";
+import { Button, Input } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
 import "./ContactUs.scss";
@@ -27,6 +27,7 @@ function ContactUs() {
       <div className="footer">
         <Link to="/">Home</Link>
         <Link to="/blog">Our Blog</Link>
+        <Link to="/new">Submit new Phone</Link>
         <Link to="/terms">Terms and Conditions</Link>
         <Link to="/privacy-policy">Privacy Policy</Link>
         <span>&copy; Drektory</span>
