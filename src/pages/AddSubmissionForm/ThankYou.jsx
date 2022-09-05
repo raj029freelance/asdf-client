@@ -67,7 +67,7 @@ const ThankYouSubmission = () => {
   return (
     <>
       <Helmet>
-        <title>Submit Your Listing</title>
+        <title>Thank you for submitting your listing</title>
       </Helmet>
       <SideBarLayout>
         <div className="thankyou-wrapper">
