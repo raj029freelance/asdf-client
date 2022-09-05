@@ -1,9 +1,13 @@
 .nav {
+  position: sticky;
+  top: 0;
+  user-select: none;
   display: grid;
   place-items: center;
   background-color: #eaeaea;
   width: 100%;
   height: 64px;
+  z-index: 99;
 
   img {
     width: 180px;
@@ -16,6 +20,55 @@
 
   @media (min-width: "1300px") {
     display: none;
+  }
+
+  .menu-icon {
+    position: absolute;
+    left: 1rem;
+    top: 30%;
+    cursor: pointer;
+    user-select: none;
+  }
+}
+
+.menu {
+  top: 4rem;
+  position: fixed;
+  height: 100vh;
+  background-color: hsl(249, 65%, 95%);
+  left: 0;
+  z-index: 99;
+  transition: width 0.1s;
+
+  @media (min-width: "1300px") {
+    display: none;
+  }
+
+  &[data-toggle="false"] {
+    width: 0;
+
+    * {
+      display: none;
+    }
+  }
+
+  &[data-toggle="true"] {
+    width: 17.5rem;
+    padding: 2rem 2.5rem 2rem 3rem;
+
+    * {
+      display: block;
+    }
+    p {
+      font-size: 1rem;
+      color: #2c3e50;
+      margin-bottom: 20px;
+      transition: color 0.3s;
+      cursor: pointer;
+      &:hover {
+        color: hsl(249, 65%, 65%);
+      }
+    }
   }
 }
 

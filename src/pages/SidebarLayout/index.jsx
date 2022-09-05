@@ -14,6 +14,8 @@ const SideBarLayout = ({
   const history = useHistory();
   const [pageLogo, setPageLogo] = useState();
 
+  const [openMenu, setMenuOpened] = useState(false);
+
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/recentSearch/`)
@@ -31,6 +33,57 @@ const SideBarLayout = ({
     <div style={{ display: "flex", flexDirection: "column" }}>
       <div className="nav">
         <Link to="/">{pageLogo && <img alt="Drektory" src={pageLogo} />}</Link>
+        <div className="menu-icon" onClick={() => setMenuOpened(!openMenu)}>
+          <span class="material-symbols-outlined">menu</span>
+        </div>
+      </div>
+
+      <div data-toggle={openMenu} className="menu">
+        {[
+          { title: "Phone Numbers", id: "phone-details" },
+          { title: "Contact Information", id: "contact-information" },
+          { title: "Company Details", id: "company-details" },
+          { title: "Customer Service", id: "company-details" },
+        ].map(({ title, id }, index) => (
+          <p
+            key={index}
+            onClick={(e) => {
+              e.preventDefault();
+              if (isOnCompanyDetails) {
+                const target = document.getElementById(id);
+                target.scrollIntoView();
+                return;
+              }
+              history.push("/");
+            }}
+          >
+            {title}
+          </p>
+        ))}
+        <p
+          onClick={(e) => {
+            e.preventDefault();
+            history.push("/blog");
+          }}
+        >
+          Our Blogs
+        </p>
+        <p
+          onClick={(e) => {
+            e.preventDefault();
+            history.push("/");
+          }}
+        >
+          Local postings
+        </p>
+        <p
+          onClick={(e) => {
+            e.preventDefault();
+            history.push("/new");
+          }}
+        >
+          Submit New Phone
+        </p>
       </div>
 
       <div className="details-wrapper">
