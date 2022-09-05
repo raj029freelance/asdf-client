@@ -13,6 +13,7 @@ import SingleBlog from "./pages/SingleBlog";
 import AddSubmissionForm from "./pages/AddSubmissionForm";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ThankYouSubmission from "./pages/AddSubmissionForm/ThankYou";
 
 function App() {
   return (
@@ -32,6 +33,8 @@ function App() {
           <Route path="/new" component={AddSubmissionForm} />
           <Route path="/not-found" component={NotFound} />
           <Route path="/phone-number/:slug" component={CompanyDetail} />
+          <Route path="/submission/success" component={ThankYouSubmission} />
+
           <Redirect to="/not-found" />
         </Switch>
       </ScrollToTop>

@@ -19,6 +19,7 @@ const initialState = {
   BestTimeToDail: "",
   serviceHours: 0,
   serviceDays: 0,
+  email: "",
 };
 
 const AddSubmissionForm = () => {
@@ -64,11 +65,11 @@ const AddSubmissionForm = () => {
   return (
     <>
       <Helmet>
-        <title>Submit Phone Number</title>
+        <title>Submit Your Listing</title>
       </Helmet>
       <SideBarLayout>
         <div className="submit-form-wrapper">
-          <h1>Submit your Listing Number</h1>
+          <h1>Submit your Listing </h1>
           <p>You can submit a request to add a new phone number</p>
           <hr
             style={{
@@ -101,6 +102,14 @@ const AddSubmissionForm = () => {
                 label="Phone Number"
               >
                 <Input type="text" placeholder="Phone Number" />
+              </Form.Item>
+
+              <Form.Item
+                rules={[{ required: true }]}
+                name="email"
+                label="Email (Will not be shown publicly)"
+              >
+                <Input type="text" placeholder="Email" />
               </Form.Item>
 
               <Form.Item
