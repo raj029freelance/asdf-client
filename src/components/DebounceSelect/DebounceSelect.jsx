@@ -35,6 +35,7 @@ function DebounceSelect({ fetchOptions, debounceTimeout = 800, ...props }) {
   return (
     <div className="debounceSelect" style={{ marginTop: "3px" }}>
       <AutoComplete
+        defaultActiveFirstOption={true}
         className="SearchOrganization "
         options={options}
         onSearch={debounceFetcher}

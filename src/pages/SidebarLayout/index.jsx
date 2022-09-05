@@ -92,7 +92,7 @@ const SideBarLayout = ({
               history.push("/new");
             }}
           >
-            Submit New Phone
+            Submit your Listing
           </p>
         </div>
 
@@ -171,7 +171,7 @@ const SideBarLayout = ({
       <div className="footer">
         <Link to="/">Home</Link>
         <Link to="/blog">Our Blog</Link>
-        <Link to="/new">Submit new Phone</Link>
+        <Link to="/new">Submit your Listing</Link>
         <Link to="/contact">Contact Us</Link>
         <Link to="/terms">Terms and Conditions</Link>
         <Link to="/privacy-policy">Privacy Policy</Link>

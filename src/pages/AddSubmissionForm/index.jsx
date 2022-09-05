@@ -68,7 +68,7 @@ const AddSubmissionForm = () => {
       </Helmet>
       <SideBarLayout>
         <div className="submit-form-wrapper">
-          <h1>Submit New Phone Number</h1>
+          <h1>Submit your Listing Number</h1>
           <p>You can submit a request to add a new phone number</p>
           <hr
             style={{

@@ -233,7 +233,7 @@ function PrivacyPolicy() {
       <div className="footer">
         <Link to="/">Home</Link>
         <Link to="/blog">Our Blog</Link>
-        <Link to="/new">Submit new Phone</Link>
+        <Link to="/new">Submit your Listing</Link>
         <Link to="/contact">Contact Us</Link>
         <Link to="/terms">Terms and Conditions</Link>
         <span>&copy; Drektory</span>

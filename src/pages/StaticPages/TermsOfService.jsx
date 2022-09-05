@@ -324,7 +324,7 @@ function TermsOfService() {
       <div className="footer">
         <Link to="/">Home</Link>
         <Link to="/blog">Our Blog</Link>
-        <Link to="/new">Submit new Phone</Link>
+        <Link to="/new">Submit your Listing</Link>
         <Link to="/contact">Contact Us</Link>
         <Link to="/privacy-policy">Privacy Policy</Link>
         <span>&copy; Drektory</span>
