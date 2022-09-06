@@ -6,7 +6,8 @@
     flex-direction: column;
     justify-content: center;
     background-image: url(https://assets.gethuman.com/img/blingHeroBG2.png),
-      linear-gradient(-44deg, #5f49d9 0, #131613a8 96%);
+      linear-gradient(-44deg, #fbf1ea, #2cc5ec 96%);
+
     background-position: center bottom, bottom;
     background-repeat: no-repeat, no-repeat;
     background-size: 100% auto, cover;
@@ -28,26 +29,26 @@
       margin-top: 3.5em;
       margin-bottom: 2.25rem;
       font-size: 2rem;
-      color: #fff;
+      color: #2c3e50;
 
       @media (min-width: 768px) {
         line-height: 1em;
         margin-top: 3.5em;
         margin-bottom: 2.25rem;
         font-size: 3rem;
-        color: #fff;
+        color: #2c3e50;
       }
     }
     h2 {
       font-weight: 400;
       line-height: 1.2em;
       margin-bottom: 2rem;
-      color: #fff;
+      color: #2c3e50;
       @media (min-width: 768px) {
         font-weight: 400;
         line-height: 1.2em;
         margin-bottom: 2.25rem;
-        color: #fff;
+        color: #2c3e50;
       }
     }
   }

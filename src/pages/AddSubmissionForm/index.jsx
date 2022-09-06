@@ -9,6 +9,7 @@ import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
 import SideBarLayout from "../SidebarLayout";
 import "./index.scss";
+import { useHistory } from "react-router-dom";
 
 const initialState = {
   CompanyName: "",
@@ -23,6 +24,8 @@ const initialState = {
 };
 
 const AddSubmissionForm = () => {
+  const history = useHistory();
+
   const [editorState, setEditorState] = useState();
   const [form] = Form.useForm();
 
@@ -48,17 +51,20 @@ const AddSubmissionForm = () => {
       .then(() => {
         form.resetFields();
         setEditorState(undefined);
-
-        toast.success("Request Submitted", {
-          autoClose: 2000,
-          pauseOnHover: false,
-        });
+        history.push("/submission/success");
       })
-      .catch(() => {
-        toast.error(`Error submitting request`, {
-          autoClose: 2000,
-          pauseOnHover: false,
-        });
+      .catch((err) => {
+        if (err.response.data.message !== undefined) {
+          toast.error(err.response.data.message, {
+            autoClose: 2000,
+            pauseOnHover: false,
+          });
+        } else {
+          toast.error(`Error submitting request.`, {
+            autoClose: 2000,
+            pauseOnHover: false,
+          });
+        }
       });
   };
 
@@ -109,7 +115,7 @@ const AddSubmissionForm = () => {
                 name="email"
                 label="Email (Will not be shown publicly)"
               >
-                <Input type="text" placeholder="Email" />
+                <Input type="email" placeholder="Email" />
               </Form.Item>
 
               <Form.Item

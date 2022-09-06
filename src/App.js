@@ -14,7 +14,7 @@ import AddSubmissionForm from "./pages/AddSubmissionForm";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ThankYouSubmission from "./pages/AddSubmissionForm/ThankYou";
-
+import ThankYouContactUs from "./pages/StaticPages/ThankYouContactUs";
 function App() {
   return (
     <div className="App">
@@ -26,7 +26,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={HomePage} />
           <Route path="/privacy-policy" component={PrivacyPolicy} />
-          <Route path="/contact" component={ContactUs} />
+          <Route path="/contact" exact component={ContactUs} />
           <Route path="/terms" component={TermsOfService} />
           <Route path="/blog/:slug" component={SingleBlog} />
           <Route path="/blog" component={Blog} />
@@ -34,7 +34,7 @@ function App() {
           <Route path="/not-found" component={NotFound} />
           <Route path="/phone-number/:slug" component={CompanyDetail} />
           <Route path="/submission/success" component={ThankYouSubmission} />
-
+          <Route path="/contact/success" exact component={ThankYouContactUs} />
           <Redirect to="/not-found" />
         </Switch>
       </ScrollToTop>
